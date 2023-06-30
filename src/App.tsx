@@ -23,7 +23,7 @@ const Header = styled.h1`
   font-family: Silkscreen;
   font-size: 3rem;
   font-weight: 700;
-  margin: 1rem auto;
+  margin: 1rem auto 1.5rem auto;
   text-align: center;
 `;
 
