@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -41,12 +41,14 @@ const PokemonId = styled.p`
 
 interface PokemonListItemProps {
   pokemonItem: PokemonCallItem;
-  onDisplayOpen: React.Dispatch<React.SetStateAction<boolean>>;
+
+  onSelectPokemon: () => void;
 }
 
 export default function PokemonListItem({
   pokemonItem,
-  onDisplayOpen,
+
+  onSelectPokemon,
 }: PokemonListItemProps) {
   const [pokemon, setPokemon] = useState<PokemonType | null>(null);
   const { url } = pokemonItem;
@@ -61,7 +63,7 @@ export default function PokemonListItem({
   }, [url]);
 
   return (
-    <ListItem onClick={() => onDisplayOpen(true)}>
+    <ListItem onClick={onSelectPokemon}>
       {pokemon && (
         <PokemonInfoWrapper>
           <PokemonId>{pokemon.id}</PokemonId>

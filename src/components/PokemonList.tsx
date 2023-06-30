@@ -1,10 +1,4 @@
-import { useEffect } from 'react';
-
 import styled from 'styled-components';
-
-import PokemonListItem from './PokemonListItem';
-
-import { PokemonCallItem } from '../types';
 
 const List = styled.ul`
   list-style: none;

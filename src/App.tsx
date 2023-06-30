@@ -41,7 +41,8 @@ const PokedexHalf = styled.div`
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
-  const [isDisplayOpen, setIsDisplayOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState('');
+  const [isPokemonSelected, setIsPokemonSelected] = useState(false);
 
   const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
@@ -65,6 +66,18 @@ export default function App() {
     setPokemonList((currPokemonList) => [...currPokemonList, ...data.results]);
   }
 
+  function onSelectPokemon(name: string) {
+    selectedPokemon === name
+      ? setSelectedPokemon('')
+      : setSelectedPokemon(name);
+    selectedPokemon === name
+      ? setIsPokemonSelected(false)
+      : setIsPokemonSelected(true);
+  }
+
+  console.log(selectedPokemon);
+  console.log(isPokemonSelected);
+
   return (
     <MainWrapper>
       <PokedexHalf>
@@ -75,7 +88,7 @@ export default function App() {
               <PokemonListItem
                 key={pokemon.name}
                 pokemonItem={pokemon}
-                onDisplayOpen={setIsDisplayOpen}
+                onSelectPokemon={() => onSelectPokemon(pokemon.name)}
               />
             ))}
         </PokemonList>
