@@ -1,5 +1,11 @@
-import './index.css';
+import { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
+
+import PokemonList from './components/PokemonList';
+import { PokemonCallItem } from './types';
+
+import './index.css';
 
 // hex code for the e on linux is ctrl + shift + u 00E9
 
@@ -32,10 +38,22 @@ const PokedexHalf = styled.div`
 `;
 
 export default function App() {
+  const [pokemonList, setPokemonList] = useState<PokemonCallItem[] | null>([]);
+
+  useEffect(() => {
+    async function callPokemon() {
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
+      const data = await res.json();
+      setPokemonList([...data.results]);
+    }
+    callPokemon();
+  }, []);
+
   return (
     <MainWrapper>
       <PokedexHalf>
         <Header>Pokédex</Header>
+        <PokemonList pokemonList={pokemonList}></PokemonList>
       </PokedexHalf>
       <PokedexHalf></PokedexHalf>
     </MainWrapper>
