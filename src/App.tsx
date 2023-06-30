@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const MainWrapper = styled.div`
   width: 75%;
-  min-width: 1000px;
-  margin: 5rem auto;
+  min-width: 1050px;
+  margin: 3.25rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,8 +21,10 @@ const Header = styled.h1`
 `;
 
 const PokedexHalf = styled.div`
-  height: 700px;
-  width: 500px;
+  /* height: 800px;
+  width: 600px; */
+  height: 45rem;
+  width: 30.5rem;
   background-color: #cc322a;
   margin: 0 5px 0 5px;
   border-radius: 15px;
