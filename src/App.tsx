@@ -39,30 +39,36 @@ const PokedexHalf = styled.div`
 `;
 
 export default function App() {
-  const [pokemonList, setPokemonList] = useState<PokemonCallItem[] | null>([]);
-  const nextUrl = useRef('');
+  const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
+
+  const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
   useEffect(() => {
-    async function callPokemonList() {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    async function fetchInitialPokemonList() {
+      const res = await fetch(nextUrl.current);
       const data = await res.json();
 
       nextUrl.current = data.next;
-
       console.log(nextUrl.current);
 
       setPokemonList([...data.results]);
     }
-    callPokemonList();
+    fetchInitialPokemonList();
   }, []);
 
-  useEffect(() => {}, [pokemonList]);
+  async function handleFetchClick() {
+    const res = await fetch(nextUrl.current);
+    const data = await res.json();
+
+    nextUrl.current = data.next;
+    setPokemonList((currPokemonList) => [...currPokemonList, ...data.results]);
+  }
 
   return (
     <MainWrapper>
       <PokedexHalf>
         <Header>Pokédex</Header>
-        <PokemonList pokemonList={pokemonList} />
+        <PokemonList pokemonList={pokemonList} onFetch={handleFetchClick} />
       </PokedexHalf>
       <PokedexHalf></PokedexHalf>
     </MainWrapper>
