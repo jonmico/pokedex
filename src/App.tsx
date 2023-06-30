@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -40,11 +40,16 @@ const PokedexHalf = styled.div`
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[] | null>([]);
+  const nextUrl = useRef('');
 
   useEffect(() => {
     async function callPokemonList() {
       const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
       const data = await res.json();
+
+      nextUrl.current = data.next;
+
+      console.log(nextUrl.current);
 
       setPokemonList([...data.results]);
     }
@@ -57,7 +62,7 @@ export default function App() {
     <MainWrapper>
       <PokedexHalf>
         <Header>Pokédex</Header>
-        <PokemonList pokemonList={pokemonList}></PokemonList>
+        <PokemonList pokemonList={pokemonList} />
       </PokedexHalf>
       <PokedexHalf></PokedexHalf>
     </MainWrapper>

@@ -37,7 +37,6 @@ const PokemonId = styled.p`
   margin: 0;
   width: 30%;
   font-size: 1rem;
-  /* font-weight: bold; */
 `;
 
 interface PokemonListItemProps {
@@ -46,7 +45,7 @@ interface PokemonListItemProps {
 
 export default function PokemonListItem({ pokemonItem }: PokemonListItemProps) {
   const [pokemon, setPokemon] = useState<PokemonType | null>(null);
-  const { url, name } = pokemonItem;
+  const { url } = pokemonItem;
 
   useEffect(() => {
     async function getPokemonInfo() {
