@@ -15,13 +15,13 @@ const LoadMoreButton = styled.button`
   width: 100%;
   padding: 10px 10px;
   margin: auto;
-  font-family: Silkscreen;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
   background-color: #ff8400;
+  font-family: Silkscreen;
 
   &:hover {
     opacity: 0.8;

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import PokemonList from './components/PokemonList';
 import PokemonListItem from './components/PokemonListItem';
+import PokemonInfo from './components/PokemonInfo';
 
 import { PokemonCallItem } from './types';
 
@@ -21,7 +22,6 @@ const MainWrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  font-family: Silkscreen;
   font-size: 3rem;
   font-weight: 700;
   margin: 1rem auto 1.5rem auto;
@@ -41,7 +41,8 @@ const PokedexHalf = styled.div`
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
-  const [selectedPokemon, setSelectedPokemon] = useState('');
+  const [selectedPokemon, setSelectedPokemon] =
+    useState<PokemonCallItem | null>(null);
   const [isPokemonSelected, setIsPokemonSelected] = useState(false);
 
   const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
@@ -66,13 +67,14 @@ export default function App() {
     setPokemonList((currPokemonList) => [...currPokemonList, ...data.results]);
   }
 
-  function onSelectPokemon(name: string) {
-    selectedPokemon === name
-      ? setSelectedPokemon('')
-      : setSelectedPokemon(name);
-    selectedPokemon === name
-      ? setIsPokemonSelected(false)
-      : setIsPokemonSelected(true);
+  function onSelectPokemon(pokemon: PokemonCallItem) {
+    if (selectedPokemon?.name === pokemon.name) {
+      setSelectedPokemon(null);
+      setIsPokemonSelected(false);
+    } else {
+      setSelectedPokemon(pokemon);
+      setIsPokemonSelected(true);
+    }
   }
 
   console.log(selectedPokemon);
@@ -88,12 +90,14 @@ export default function App() {
               <PokemonListItem
                 key={pokemon.name}
                 pokemonItem={pokemon}
-                onSelectPokemon={() => onSelectPokemon(pokemon.name)}
+                onSelectPokemon={() => onSelectPokemon(pokemon)}
               />
             ))}
         </PokemonList>
       </PokedexHalf>
-      <PokedexHalf></PokedexHalf>
+      <PokedexHalf>
+        {isPokemonSelected && <PokemonInfo pokemon={selectedPokemon} />}
+      </PokedexHalf>
     </MainWrapper>
   );
 }
