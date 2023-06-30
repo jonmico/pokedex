@@ -1,6 +1,8 @@
 import './index.css';
 import styled from 'styled-components';
 
+// hex code for the e on linux is ctrl + shift + u 00E9
+
 const MainWrapper = styled.div`
   width: 75%;
   min-width: 1000px;
