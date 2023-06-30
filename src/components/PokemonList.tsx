@@ -11,7 +11,7 @@ export default function PokemonList({ pokemonList }: PokemonListProps) {
     <ul>
       {pokemonList &&
         pokemonList.map((pokemon) => (
-          <PokemonListItem key={pokemon.name} pokemon={pokemon} />
+          <PokemonListItem key={pokemon.name} pokemonItem={pokemon} />
         ))}
     </ul>
   );

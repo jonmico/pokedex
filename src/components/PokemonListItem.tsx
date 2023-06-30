@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { PokemonCallItem } from '../types';
+import { PokemonCallItem, PokemonType } from '../types';
 
 interface PokemonListItemProps {
-  pokemon: PokemonCallItem;
+  pokemonItem: PokemonCallItem;
 }
 
-export default function PokemonListItem({ pokemon }: PokemonListItemProps) {
-  const { name, url } = pokemon;
+export default function PokemonListItem({ pokemonItem }: PokemonListItemProps) {
+  const [pokemon, setPokemon] = useState<PokemonType | null>(null);
+  const { url, name } = pokemonItem;
 
   useEffect(() => {
     async function getPokemonInfo() {
       const res = await fetch(url);
       const pokemonData = await res.json();
-      console.log(pokemonData);
+      setPokemon({ ...pokemonData });
     }
     getPokemonInfo();
   }, [url]);
 
-  return <li>{name}</li>;
+  return <li>{pokemon && `${pokemon.name} ${pokemon.id}`}</li>;
 }

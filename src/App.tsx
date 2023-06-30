@@ -45,10 +45,13 @@ export default function App() {
     async function callPokemonList() {
       const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
       const data = await res.json();
+
       setPokemonList([...data.results]);
     }
     callPokemonList();
   }, []);
+
+  useEffect(() => {}, [pokemonList]);
 
   return (
     <MainWrapper>
