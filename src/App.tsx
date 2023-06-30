@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import PokemonList from './components/PokemonList';
+import PokemonListItem from './components/PokemonListItem';
 
 import { PokemonCallItem } from './types';
 
@@ -40,6 +41,7 @@ const PokedexHalf = styled.div`
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
+  const [isDisplayOpen, setIsDisplayOpen] = useState(false);
 
   const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
@@ -49,7 +51,6 @@ export default function App() {
       const data = await res.json();
 
       nextUrl.current = data.next;
-      console.log(nextUrl.current);
 
       setPokemonList([...data.results]);
     }
@@ -68,7 +69,16 @@ export default function App() {
     <MainWrapper>
       <PokedexHalf>
         <Header>Pokédex</Header>
-        <PokemonList pokemonList={pokemonList} onFetch={handleFetchClick} />
+        <PokemonList onFetch={handleFetchClick}>
+          {pokemonList &&
+            pokemonList.map((pokemon) => (
+              <PokemonListItem
+                key={pokemon.name}
+                pokemonItem={pokemon}
+                onDisplayOpen={setIsDisplayOpen}
+              />
+            ))}
+        </PokemonList>
       </PokedexHalf>
       <PokedexHalf></PokedexHalf>
     </MainWrapper>

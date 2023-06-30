@@ -43,20 +43,14 @@ const LoadMoreButton = styled.button`
 `;
 
 interface PokemonListProps {
-  pokemonList: PokemonCallItem[] | null;
   onFetch: () => void;
+  children: React.ReactNode;
 }
 
-export default function PokemonList({
-  pokemonList,
-  onFetch,
-}: PokemonListProps) {
+export default function PokemonList({ children, onFetch }: PokemonListProps) {
   return (
     <List>
-      {pokemonList &&
-        pokemonList.map((pokemon) => (
-          <PokemonListItem key={pokemon.name} pokemonItem={pokemon} />
-        ))}
+      {children}
       <LoadMoreButton onClick={onFetch}>
         Load More{' '}
         <img
