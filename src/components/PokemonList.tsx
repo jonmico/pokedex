@@ -1,3 +1,5 @@
+import PokemonListItem from './PokemonListItem';
+
 import { PokemonCallItem } from '../types';
 
 interface PokemonListProps {
@@ -7,7 +9,10 @@ interface PokemonListProps {
 export default function PokemonList({ pokemonList }: PokemonListProps) {
   return (
     <ul>
-      {pokemonList && pokemonList.map((pokemon) => <li>{pokemon.name}</li>)}
+      {pokemonList &&
+        pokemonList.map((pokemon) => (
+          <PokemonListItem key={pokemon.name} pokemon={pokemon} />
+        ))}
     </ul>
   );
 }

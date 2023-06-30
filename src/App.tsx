@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import PokemonList from './components/PokemonList';
+
 import { PokemonCallItem } from './types';
 
 import './index.css';
@@ -41,12 +42,12 @@ export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[] | null>([]);
 
   useEffect(() => {
-    async function callPokemon() {
+    async function callPokemonList() {
       const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
       const data = await res.json();
       setPokemonList([...data.results]);
     }
-    callPokemon();
+    callPokemonList();
   }, []);
 
   return (
