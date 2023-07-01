@@ -9,7 +9,7 @@ import PokemonFlavorText from './PokemonFlavorText';
 const PokemonInfoDiv = styled.div`
   border: 1px solid black;
   width: 80%;
-  height: 37.5rem;
+  height: 38.5rem;
   padding: 10px;
   background-color: #ff8400;
   margin: 3rem auto;
@@ -21,7 +21,7 @@ const PokemonSprite = styled.div`
   border-radius: 15px;
   background-color: #bacddb;
   width: 90%;
-  margin: 1.5rem auto;
+  margin: 1.5rem auto 0.75rem auto;
   img {
     width: 300px;
     display: block;
