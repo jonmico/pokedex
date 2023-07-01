@@ -13,4 +13,5 @@ export type PokemonDataType = PokemonType & {
   weight: number;
   height: number;
   types: [];
+  species: { url: string };
 };
