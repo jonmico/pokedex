@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { PokemonDataType } from '../types';
 
 const Header = styled.div`
-  padding: 0 25px;
   margin-bottom: 1rem;
 `;
 

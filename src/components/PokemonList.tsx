@@ -16,9 +16,6 @@ const LoadMoreButton = styled.button`
   padding: 10px 10px;
   margin: auto;
   font-size: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 1px solid black;
   background-color: #ff8400;
   font-family: Silkscreen;
@@ -45,14 +42,7 @@ export default function PokemonList({ children, onFetch }: PokemonListProps) {
   return (
     <List>
       {children}
-      <LoadMoreButton onClick={onFetch}>
-        Load More{' '}
-        <img
-          src={
-            'https://www.pngmart.com/files/2/Pikachu-Transparent-Background.png'
-          }
-        ></img>
-      </LoadMoreButton>
+      <LoadMoreButton onClick={onFetch}>Load More</LoadMoreButton>
     </List>
   );
 }

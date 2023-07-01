@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 
 import { PokemonCallItem, PokemonDataType } from '../types';
 import PokemonHeader from './PokemonHeader';
+import PokemonFlavorText from './PokemonFlavorText';
 
 const PokemonInfoDiv = styled.div`
   border: 1px solid black;
   width: 80%;
+  height: 37.5rem;
   padding: 10px;
   background-color: #ff8400;
   margin: 3rem auto;
@@ -25,6 +27,38 @@ const PokemonSprite = styled.div`
     display: block;
     margin: auto;
   }
+`;
+
+const PokemonDataWrapper = styled.div`
+  padding: 0 25px;
+`;
+
+const CaughtButton = styled.button`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 15px 10px;
+  margin: 1rem auto 0 auto;
+  background-color: #ff8400;
+  font-family: Silkscreen;
+  font-size: 1.2rem;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:active {
+    background-color: #bacddb;
+  }
+`;
+
+const Pokeball = styled.img`
+  display: block;
+  margin-left: 0.5rem;
+  width: 25px;
 `;
 
 interface PokemonInfoProps {
@@ -49,7 +83,19 @@ export default function PokemonInfo({ pokemon }: PokemonInfoProps) {
       <PokemonSprite>
         <img src={pokemonData?.sprites.front_default} alt='' />
       </PokemonSprite>
-      <PokemonHeader pokemon={pokemonData} />
+      <PokemonDataWrapper>
+        <PokemonHeader pokemon={pokemonData} />
+        <PokemonFlavorText pokemon={pokemonData} />
+        <CaughtButton>
+          Caught{' '}
+          <Pokeball
+            src={
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'
+            }
+            alt='Pokeball Icon'
+          ></Pokeball>
+        </CaughtButton>
+      </PokemonDataWrapper>
     </PokemonInfoDiv>
   );
 }
