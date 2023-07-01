@@ -19,9 +19,13 @@ const ListItem = styled.li`
   }
 `;
 
-const Pokeball = styled.img`
+interface PokeballProps {
+  $isCaught: boolean;
+}
+
+const Pokeball = styled.img<PokeballProps>`
   width: 25px;
-  opacity: 0.2;
+  opacity: ${({ $isCaught }) => ($isCaught ? 1 : 0.2)};
   padding-right: 10px;
 `;
 
@@ -41,17 +45,19 @@ const PokemonId = styled.p`
 
 interface PokemonListItemProps {
   pokemonItem: PokemonCallItem;
-
   onSelectPokemon: () => void;
+  caughtList: string[];
 }
 
 export default function PokemonListItem({
   pokemonItem,
-
+  caughtList,
   onSelectPokemon,
 }: PokemonListItemProps) {
   const [pokemon, setPokemon] = useState<PokemonType | null>(null);
   const { url } = pokemonItem;
+
+  const isCaught = caughtList.includes(pokemonItem.name);
 
   useEffect(() => {
     async function getPokemonInfo() {
@@ -71,6 +77,7 @@ export default function PokemonListItem({
         </PokemonInfoWrapper>
       )}
       <Pokeball
+        $isCaught={isCaught}
         src={
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'
         }

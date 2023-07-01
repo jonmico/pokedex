@@ -44,6 +44,7 @@ export default function App() {
   const [selectedPokemon, setSelectedPokemon] =
     useState<PokemonCallItem | null>(null);
   const [isPokemonSelected, setIsPokemonSelected] = useState(false);
+  const [caughtList, setCaughtList] = useState<string[]>([]);
 
   const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
@@ -77,8 +78,12 @@ export default function App() {
     }
   }
 
-  console.log(selectedPokemon);
-  console.log(isPokemonSelected);
+  function handleAddCaught(pokemon: PokemonCallItem | null) {
+    if (pokemon) {
+      if (caughtList.includes(pokemon.name)) return;
+      setCaughtList((currCaughtList) => [...currCaughtList, pokemon.name]);
+    }
+  }
 
   return (
     <MainWrapper>
@@ -91,12 +96,18 @@ export default function App() {
                 key={pokemon.name}
                 pokemonItem={pokemon}
                 onSelectPokemon={() => onSelectPokemon(pokemon)}
+                caughtList={caughtList}
               />
             ))}
         </PokemonList>
       </PokedexHalf>
       <PokedexHalf>
-        {isPokemonSelected && <PokemonInfo pokemon={selectedPokemon} />}
+        {isPokemonSelected && (
+          <PokemonInfo
+            pokemon={selectedPokemon}
+            onAddCaught={() => handleAddCaught(selectedPokemon)}
+          />
+        )}
       </PokedexHalf>
     </MainWrapper>
   );

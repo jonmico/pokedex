@@ -27,7 +27,7 @@ export default function PokemonHeader({ pokemon }: PokemonHeaderProps) {
         <div>
           {pokemon?.types.map(
             (type: { slot: number; type: { name: string } }) => (
-              <div>
+              <div key={type.type.name}>
                 <span>{type.type.name}</span>
               </div>
             )

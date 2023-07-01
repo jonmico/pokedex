@@ -63,9 +63,13 @@ const Pokeball = styled.img`
 
 interface PokemonInfoProps {
   pokemon: PokemonCallItem | null;
+  onAddCaught: () => void;
 }
 
-export default function PokemonInfo({ pokemon }: PokemonInfoProps) {
+export default function PokemonInfo({
+  pokemon,
+  onAddCaught,
+}: PokemonInfoProps) {
   const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null);
   useEffect(() => {
     async function getPokemonInfo() {
@@ -86,8 +90,8 @@ export default function PokemonInfo({ pokemon }: PokemonInfoProps) {
       <PokemonDataWrapper>
         <PokemonHeader pokemon={pokemonData} />
         <PokemonFlavorText pokemon={pokemonData} />
-        <CaughtButton>
-          Caught{' '}
+        <CaughtButton onClick={onAddCaught}>
+          <span>Caught</span>
           <Pokeball
             src={
               'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'
