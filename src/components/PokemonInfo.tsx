@@ -76,7 +76,8 @@ export default function PokemonInfo({
 }: PokemonInfoProps) {
   const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null);
 
-  const isCaught = caughtList.includes(pokemon.name);
+  let isCaught = false;
+  if (pokemon) isCaught = caughtList.includes(pokemon.name);
 
   useEffect(() => {
     async function getPokemonInfo() {
