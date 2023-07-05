@@ -24,7 +24,7 @@ const MainWrapper = styled.div`
 const Header = styled.h1`
   font-size: 3rem;
   font-weight: 700;
-  margin: 0 auto 1rem auto;
+  margin: 1.25rem auto;
   text-align: center;
 `;
 
@@ -42,18 +42,37 @@ const PokedexHalf = styled.div`
   box-shadow: 1px 1px 5px black, -1px -1px 5px black;
 `;
 
+const GenerationSelect = styled.select`
+  margin: auto;
+  font-family: Silkscreen;
+  width: 50%;
+  background-color: #ff8400;
+  border: none;
+`;
+
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
   const [selectedPokemon, setSelectedPokemon] =
     useState<PokemonCallItem | null>(null);
   const [isPokemonSelected, setIsPokemonSelected] = useState(false);
   const [caughtList, setCaughtList] = useState<string[]>([]);
+  const [selectedGeneration, setSelectedGeneration] = useState('');
 
   const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
   useEffect(() => {
     async function fetchInitialPokemonList() {
-      const res = await fetch(nextUrl.current);
+      let begin = 0;
+      let end = 0;
+
+      switch (selectedGeneration) {
+        case 'gen-1':
+          begin = 0;
+          end = 151;
+      }
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/?limit=${end}&offset=${begin}`
+      );
       const data = await res.json();
 
       nextUrl.current = data.next;
@@ -61,7 +80,7 @@ export default function App() {
       setPokemonList([...data.results]);
     }
     fetchInitialPokemonList();
-  }, []);
+  }, [selectedGeneration]);
 
   async function handleFetchClick() {
     const res = await fetch(nextUrl.current);
@@ -97,18 +116,31 @@ export default function App() {
     <MainWrapper>
       <PokedexHalf>
         <Header>Pokédex</Header>
-        <PokemonList onFetch={handleFetchClick}>
-          {pokemonList &&
-            pokemonList.map((pokemon) => (
-              <PokemonListItem
-                key={pokemon.name}
-                pokemonItem={pokemon}
-                onSelectPokemon={() => onSelectPokemon(pokemon)}
-                caughtList={caughtList}
-                selectedPokemon={selectedPokemon}
-              />
-            ))}
-        </PokemonList>
+        {selectedGeneration && (
+          <PokemonList onFetch={handleFetchClick}>
+            {pokemonList &&
+              pokemonList.map((pokemon) => (
+                <PokemonListItem
+                  key={pokemon.name}
+                  pokemonItem={pokemon}
+                  onSelectPokemon={() => onSelectPokemon(pokemon)}
+                  caughtList={caughtList}
+                  selectedPokemon={selectedPokemon}
+                />
+              ))}
+          </PokemonList>
+        )}
+        <GenerationSelect
+          value={selectedGeneration}
+          name='generation-picker'
+          id='generation-picker'
+          onChange={(evt) => setSelectedGeneration(evt.target.value)}
+        >
+          <option value=''>Choose a Generation</option>
+          <option value='gen-1'>Gen I</option>
+          <option value='gen-2'>Gen II</option>
+          <option value='gen-3'>Gen III</option>
+        </GenerationSelect>
       </PokedexHalf>
       <PokedexHalf>
         {isPokemonSelected && (

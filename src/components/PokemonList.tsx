@@ -6,7 +6,7 @@ const List = styled.ul`
   width: 70%;
   margin: 0 auto;
   font-family: Silkscreen;
-  height: 75%;
+  height: 60%;
   border: 1px solid black;
   overflow: auto;
   border-radius: 10px;
