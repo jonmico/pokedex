@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -48,6 +48,7 @@ const GenerationSelect = styled.select`
   width: 50%;
   background-color: #ff8400;
   border: none;
+  height: 35px;
 `;
 
 export default function App() {
@@ -57,8 +58,6 @@ export default function App() {
   const [isPokemonSelected, setIsPokemonSelected] = useState(false);
   const [caughtList, setCaughtList] = useState<string[]>([]);
   const [selectedGeneration, setSelectedGeneration] = useState('');
-
-  const nextUrl = useRef('https://pokeapi.co/api/v2/pokemon/');
 
   useEffect(() => {
     async function fetchInitialPokemonList() {
@@ -83,20 +82,10 @@ export default function App() {
       );
       const data = await res.json();
 
-      nextUrl.current = data.next;
-
       setPokemonList([...data.results]);
     }
     fetchInitialPokemonList();
   }, [selectedGeneration]);
-
-  async function handleFetchClick() {
-    const res = await fetch(nextUrl.current);
-    const data = await res.json();
-
-    nextUrl.current = data.next;
-    setPokemonList((currPokemonList) => [...currPokemonList, ...data.results]);
-  }
 
   function onSelectPokemon(pokemon: PokemonCallItem) {
     if (selectedPokemon?.name === pokemon.name) {
@@ -125,7 +114,7 @@ export default function App() {
       <PokedexHalf>
         <Header>Pokédex</Header>
         {selectedGeneration && (
-          <PokemonList onFetch={handleFetchClick}>
+          <PokemonList>
             {pokemonList &&
               pokemonList.map((pokemon) => (
                 <PokemonListItem
