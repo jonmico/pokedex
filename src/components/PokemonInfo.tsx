@@ -85,23 +85,25 @@ export default function PokemonInfo({
   }, [pokemon]);
 
   return (
-    <PokemonInfoDiv>
-      <PokemonSprite>
-        <img src={pokemonData?.sprites.front_default} alt='' />
-      </PokemonSprite>
-      <PokemonDataWrapper>
-        <PokemonHeader pokemon={pokemonData} />
-        <PokemonFlavorText pokemon={pokemonData} />
-        <CaughtButton onClick={onAddCaught}>
-          <span>Caught</span>
-          <Pokeball
-            src={
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'
-            }
-            alt='Pokeball Icon'
-          ></Pokeball>
-        </CaughtButton>
-      </PokemonDataWrapper>
-    </PokemonInfoDiv>
+    <>
+      <PokemonInfoDiv>
+        <PokemonSprite>
+          <img src={pokemonData?.sprites.front_default} alt='' />
+        </PokemonSprite>
+        <PokemonDataWrapper>
+          <PokemonHeader pokemon={pokemonData} />
+          <PokemonFlavorText pokemon={pokemonData} />
+          <CaughtButton onClick={onAddCaught}>
+            <span>Caught</span>
+            <Pokeball
+              src={
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'
+              }
+              alt='Pokeball Icon'
+            ></Pokeball>
+          </CaughtButton>
+        </PokemonDataWrapper>
+      </PokemonInfoDiv>
+    </>
   );
 }

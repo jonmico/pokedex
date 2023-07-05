@@ -100,6 +100,7 @@ export default function App() {
                 pokemonItem={pokemon}
                 onSelectPokemon={() => onSelectPokemon(pokemon)}
                 caughtList={caughtList}
+                selectedPokemon={selectedPokemon}
               />
             ))}
         </PokemonList>

@@ -9,6 +9,7 @@ const List = styled.ul`
   height: 75%;
   border: 1px solid black;
   overflow: auto;
+  border-radius: 10px;
 `;
 
 const LoadMoreButton = styled.button`

@@ -4,10 +4,15 @@ import styled from 'styled-components';
 
 import { PokemonCallItem, PokemonType } from '../types';
 
-const ListItem = styled.li`
+interface ListItemProps {
+  $isSelected: boolean;
+}
+
+const ListItem = styled.li<ListItemProps>`
   padding: 10px 5px;
   border: 1px solid black;
-  background-color: #ff8400;
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? '#F2BE22' : '#ff8400'};
   font-size: 1.25rem;
   display: flex;
   align-items: center;
@@ -45,6 +50,7 @@ const PokemonId = styled.p`
 
 interface PokemonListItemProps {
   pokemonItem: PokemonCallItem;
+  selectedPokemon: PokemonCallItem | null;
   onSelectPokemon: () => void;
   caughtList: string[];
 }
@@ -52,12 +58,14 @@ interface PokemonListItemProps {
 export default function PokemonListItem({
   pokemonItem,
   caughtList,
+  selectedPokemon,
   onSelectPokemon,
 }: PokemonListItemProps) {
   const [pokemon, setPokemon] = useState<PokemonType | null>(null);
   const { url } = pokemonItem;
 
   const isCaught = caughtList.includes(pokemonItem.name);
+  const isSelected = selectedPokemon?.name === pokemonItem.name;
 
   useEffect(() => {
     async function getPokemonInfo() {
@@ -69,7 +77,7 @@ export default function PokemonListItem({
   }, [url]);
 
   return (
-    <ListItem onClick={onSelectPokemon}>
+    <ListItem onClick={onSelectPokemon} $isSelected={isSelected}>
       {pokemon && (
         <PokemonInfoWrapper>
           <PokemonId>{pokemon.id}</PokemonId>
