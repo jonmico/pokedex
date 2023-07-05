@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PokemonCallItem, PokemonDataType } from '../types';
 import PokemonHeader from './PokemonHeader';
