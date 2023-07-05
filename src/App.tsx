@@ -109,6 +109,11 @@ export default function App() {
     }
   }
 
+  function handleClosePokemonInfo() {
+    setSelectedPokemon(null);
+    setIsPokemonSelected(false);
+  }
+
   return (
     <MainWrapper>
       <PokedexHalf>
@@ -142,6 +147,7 @@ export default function App() {
       <PokedexHalf>
         {isPokemonSelected && (
           <PokemonInfo
+            onClose={handleClosePokemonInfo}
             pokemon={selectedPokemon}
             onAddCaught={() => handleAddCaught(selectedPokemon)}
             caughtList={caughtList}

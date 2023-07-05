@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
 import { PokemonCallItem, PokemonDataType } from '../types';
 import PokemonHeader from './PokemonHeader';
@@ -23,7 +23,7 @@ const PokemonSprite = styled.div`
   border-radius: 15px;
   background-color: #bacddb;
   width: 90%;
-  margin: 1.5rem auto 0.75rem auto;
+  margin: 0.25rem auto 0.75rem auto;
   img {
     width: 300px;
     display: block;
@@ -57,6 +57,25 @@ const CaughtButton = styled.button`
   }
 `;
 
+const CloseButton = styled.button`
+  border: none;
+  background-color: #ff8400;
+  font-size: 1.5rem;
+  padding: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: 5px;
+
+  &:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+`;
+
 const Pokeball = styled.img`
   display: block;
   margin-left: 0.5rem;
@@ -65,6 +84,7 @@ const Pokeball = styled.img`
 
 interface PokemonInfoProps {
   pokemon: PokemonCallItem | null;
+  onClose: () => void;
   onAddCaught: () => void;
   caughtList: string[];
 }
@@ -73,6 +93,7 @@ export default function PokemonInfo({
   pokemon,
   onAddCaught,
   caughtList,
+  onClose,
 }: PokemonInfoProps) {
   const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null);
 
@@ -93,6 +114,7 @@ export default function PokemonInfo({
   return (
     <>
       <PokemonInfoDiv>
+        <CloseButton onClick={onClose}>&#10005;</CloseButton>
         <PokemonSprite>
           <img src={pokemonData?.sprites.front_default} alt='' />
         </PokemonSprite>
