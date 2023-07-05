@@ -31,7 +31,7 @@ const Header = styled.h1`
 const PokedexHalf = styled.div`
   /* height: 800px;
   width: 600px; */
-  height: 45rem;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

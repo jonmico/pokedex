@@ -9,11 +9,13 @@ import PokemonFlavorText from './PokemonFlavorText';
 const PokemonInfoDiv = styled.div`
   border: 1px solid black;
   width: 80%;
-  height: 38.5rem;
+  min-width: 325px;
+  /* height: 38.5rem; */
   padding: 10px;
   background-color: #ff8400;
-  margin: 0 auto;
+  margin: 2rem auto;
   border-radius: 10px;
+  overflow: auto;
 `;
 
 const PokemonSprite = styled.div`
@@ -40,7 +42,7 @@ const CaughtButton = styled.button`
   justify-content: center;
   border: 1px solid black;
   padding: 15px 10px;
-  margin: 1rem auto 0 auto;
+  margin: 1.5rem auto 1.5rem auto;
   background-color: #ff8400;
   font-family: Silkscreen;
   font-size: 1.2rem;
