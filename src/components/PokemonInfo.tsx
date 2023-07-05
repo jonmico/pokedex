@@ -66,13 +66,18 @@ const Pokeball = styled.img`
 interface PokemonInfoProps {
   pokemon: PokemonCallItem | null;
   onAddCaught: () => void;
+  caughtList: string[];
 }
 
 export default function PokemonInfo({
   pokemon,
   onAddCaught,
+  caughtList,
 }: PokemonInfoProps) {
   const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null);
+
+  const isCaught = caughtList.includes(pokemon.name);
+
   useEffect(() => {
     async function getPokemonInfo() {
       if (pokemon) {
@@ -94,7 +99,7 @@ export default function PokemonInfo({
           <PokemonHeader pokemon={pokemonData} />
           <PokemonFlavorText pokemon={pokemonData} />
           <CaughtButton onClick={onAddCaught}>
-            <span>Caught</span>
+            {isCaught ? <span>Release</span> : <span>Caught</span>}
             <Pokeball
               src={
                 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png'

@@ -83,8 +83,13 @@ export default function App() {
 
   function handleAddCaught(pokemon: PokemonCallItem | null) {
     if (pokemon) {
-      if (caughtList.includes(pokemon.name)) return;
-      setCaughtList((currCaughtList) => [...currCaughtList, pokemon.name]);
+      if (caughtList.includes(pokemon.name)) {
+        setCaughtList((currCaughtList) =>
+          currCaughtList.filter((p) => p !== pokemon.name)
+        );
+      } else {
+        setCaughtList((currCaughtList) => [...currCaughtList, pokemon.name]);
+      }
     }
   }
 
@@ -110,6 +115,7 @@ export default function App() {
           <PokemonInfo
             pokemon={selectedPokemon}
             onAddCaught={() => handleAddCaught(selectedPokemon)}
+            caughtList={caughtList}
           />
         )}
       </PokedexHalf>
