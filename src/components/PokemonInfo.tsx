@@ -12,7 +12,7 @@ const PokemonInfoDiv = styled.div`
   height: 38.5rem;
   padding: 10px;
   background-color: #ff8400;
-  margin: 3rem auto;
+  margin: 0 auto;
   border-radius: 10px;
 `;
 

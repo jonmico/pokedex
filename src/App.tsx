@@ -24,7 +24,7 @@ const MainWrapper = styled.div`
 const Header = styled.h1`
   font-size: 3rem;
   font-weight: 700;
-  margin: 1rem auto 1.5rem auto;
+  margin: 0 auto 1rem auto;
   text-align: center;
 `;
 
@@ -32,7 +32,10 @@ const PokedexHalf = styled.div`
   /* height: 800px;
   width: 600px; */
   height: 45rem;
-  width: 30.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
   background-color: #cc322a;
   margin: 0 5px 0 5px;
   border-radius: 15px;

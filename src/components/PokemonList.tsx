@@ -4,9 +4,9 @@ const List = styled.ul`
   list-style: none;
   padding: 0;
   width: 70%;
-  margin: auto;
+  margin: 0 auto;
   font-family: Silkscreen;
-  height: 70%;
+  height: 75%;
   border: 1px solid black;
   overflow: auto;
 `;
