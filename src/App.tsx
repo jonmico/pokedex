@@ -14,7 +14,7 @@ import './index.css';
 
 const MainWrapper = styled.div`
   width: 75%;
-  min-width: 1050px;
+  min-width: 925px;
   margin: 3.25rem auto;
   display: flex;
   justify-content: center;
