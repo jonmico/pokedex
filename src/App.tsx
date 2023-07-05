@@ -62,16 +62,24 @@ export default function App() {
 
   useEffect(() => {
     async function fetchInitialPokemonList() {
-      let begin = 0;
-      let end = 0;
+      let offset = 0;
+      let limit = 0;
 
       switch (selectedGeneration) {
         case 'gen-1':
-          begin = 0;
-          end = 151;
+          offset = 0;
+          limit = 151;
+          break;
+        case 'gen-2':
+          offset = 151;
+          limit = 100;
+          break;
+        case 'gen-3':
+          offset = 251;
+          limit = 135;
       }
       const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=${end}&offset=${begin}`
+        `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
       );
       const data = await res.json();
 
