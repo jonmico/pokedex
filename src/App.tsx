@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -28,13 +28,11 @@ const Header = styled.h1`
   text-align: center;
 `;
 
-const PokedexHalf = styled.div`
-  /* height: 800px;
-  width: 600px; */
+const PokedexHalfList = styled.div`
   height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 40%;
   background-color: #cc322a;
   margin: 0 5px 0 5px;
@@ -42,8 +40,12 @@ const PokedexHalf = styled.div`
   box-shadow: 1px 1px 5px black, -1px -1px 5px black;
 `;
 
+const PokedexHalfInfo = styled(PokedexHalfList)`
+  justify-content: center;
+`;
+
 const GenerationSelect = styled.select`
-  margin: auto;
+  margin-top: 2rem;
   font-family: Silkscreen;
   width: 50%;
   background-color: #ff8400;
@@ -58,6 +60,10 @@ export default function App() {
   const [isPokemonSelected, setIsPokemonSelected] = useState(false);
   const [caughtList, setCaughtList] = useState<string[]>([]);
   const [selectedGeneration, setSelectedGeneration] = useState('');
+  const [textFilter, setTextFilter] = useState('');
+  const [filteredPokemonList, setFilteredPokemonList] = useState<
+    PokemonCallItem[]
+  >([]);
 
   useEffect(() => {
     async function fetchInitialPokemonList() {
@@ -86,6 +92,13 @@ export default function App() {
     }
     fetchInitialPokemonList();
   }, [selectedGeneration]);
+
+  useEffect(() => {
+    const newFilteredPokemon = pokemonList.filter((pokemon) =>
+      pokemon.name.includes(textFilter.toLowerCase())
+    );
+    setFilteredPokemonList(newFilteredPokemon);
+  }, [pokemonList, textFilter]);
 
   function onSelectPokemon(pokemon: PokemonCallItem) {
     if (selectedPokemon?.name === pokemon.name) {
@@ -116,21 +129,29 @@ export default function App() {
 
   return (
     <MainWrapper>
-      <PokedexHalf>
+      <PokedexHalfList>
         <Header>Pokédex</Header>
         {selectedGeneration && (
-          <PokemonList>
-            {pokemonList &&
-              pokemonList.map((pokemon) => (
-                <PokemonListItem
-                  key={pokemon.name}
-                  pokemonItem={pokemon}
-                  onSelectPokemon={() => onSelectPokemon(pokemon)}
-                  caughtList={caughtList}
-                  selectedPokemon={selectedPokemon}
-                />
-              ))}
-          </PokemonList>
+          <>
+            <input
+              type='text'
+              placeholder='Filter by name'
+              value={textFilter}
+              onChange={(evt) => setTextFilter(evt.target.value)}
+            />
+            <PokemonList>
+              {filteredPokemonList &&
+                filteredPokemonList.map((pokemon) => (
+                  <PokemonListItem
+                    key={pokemon.name}
+                    pokemonItem={pokemon}
+                    onSelectPokemon={() => onSelectPokemon(pokemon)}
+                    caughtList={caughtList}
+                    selectedPokemon={selectedPokemon}
+                  />
+                ))}
+            </PokemonList>
+          </>
         )}
         <GenerationSelect
           value={selectedGeneration}
@@ -143,8 +164,8 @@ export default function App() {
           <option value='gen-2'>Gen II</option>
           <option value='gen-3'>Gen III</option>
         </GenerationSelect>
-      </PokedexHalf>
-      <PokedexHalf>
+      </PokedexHalfList>
+      <PokedexHalfInfo>
         {isPokemonSelected && (
           <PokemonInfo
             onClose={handleClosePokemonInfo}
@@ -153,7 +174,7 @@ export default function App() {
             caughtList={caughtList}
           />
         )}
-      </PokedexHalf>
+      </PokedexHalfInfo>
     </MainWrapper>
   );
 }

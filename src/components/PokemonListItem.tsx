@@ -12,7 +12,7 @@ const ListItem = styled.li<ListItemProps>`
   padding: 10px 5px;
   border: 1px solid black;
   background-color: ${({ $isSelected }) =>
-    $isSelected ? '#F2BE22' : '#ff8400'};
+    $isSelected ? '#a7b9d3' : '#ff8400'};
   font-size: 1.25rem;
   display: flex;
   align-items: center;
