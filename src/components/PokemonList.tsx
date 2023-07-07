@@ -18,6 +18,10 @@ const List = styled.ul`
     max-height: 15rem;
     min-height: auto;
   }
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 interface PokemonListProps {

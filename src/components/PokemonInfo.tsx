@@ -10,12 +10,22 @@ const PokemonInfoDiv = styled.div`
   border: 1px solid black;
   width: 80%;
   min-width: 325px;
-  /* height: 38.5rem; */
   padding: 10px;
   background-color: #ff8400;
   margin: 2rem auto;
   border-radius: 10px;
   overflow: auto;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center;
+  justify-content: center; */
+
+  @media only screen and (max-width: 800px) {
+    padding: 5px;
+    width: 100%;
+    min-width: auto;
+    margin: 0;
+  }
 `;
 
 const PokemonSprite = styled.div`
@@ -29,19 +39,29 @@ const PokemonSprite = styled.div`
     display: block;
     margin: auto;
   }
+
+  @media only screen and (max-width: 800px) {
+    img {
+      width: 200px;
+    }
+  }
 `;
 
 const PokemonDataWrapper = styled.div`
   padding: 0 25px;
+
+  @media only screen and (max-width: 800px) {
+    padding: 0 10px;
+  }
 `;
 
 const CaughtButton = styled.button`
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
-  padding: 15px 10px;
+  padding: 0.75em 1.25em;
   margin: 1.5rem auto 1.5rem auto;
   background-color: #ff8400;
   font-family: Silkscreen;
@@ -54,6 +74,10 @@ const CaughtButton = styled.button`
 
   &:active {
     background-color: #bacddb;
+  }
+
+  @media only screen and (max-width: 800px) {
+    font-size: 1rem;
   }
 `;
 

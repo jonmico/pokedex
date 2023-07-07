@@ -32,6 +32,11 @@ const Header = styled.h1`
   font-weight: 700;
   margin: 2rem auto 1.25rem auto;
   text-align: center;
+
+  @media only screen and (max-width: 800px) {
+    font-size: 2rem;
+    margin: 0.5rem auto 1.25rem auto;
+  }
 `;
 
 const PokedexHalfList = styled.div`
@@ -46,9 +51,17 @@ const PokedexHalfList = styled.div`
   border-radius: 15px;
   box-shadow: 1px 1px 5px black, -1px -1px 5px black;
 
+  box-sizing: border-box;
+
   @media only screen and (max-width: 950px) {
     height: auto;
     margin-bottom: 1rem;
+    /* min-width: auto; */
+
+    @media only screen and (max-width: 800px) {
+      padding: 1rem;
+      min-width: 300px;
+    }
   }
 `;
 
@@ -65,6 +78,10 @@ const GenerationSelect = styled.select`
   box-sizing: border-box;
   border-radius: 10px;
   margin-bottom: 1rem;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const SearchPokemon = styled.input`
@@ -78,6 +95,10 @@ const SearchPokemon = styled.input`
   font-family: Silkscreen;
   height: 2.5rem;
   font-size: 1rem;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 export default function App() {
