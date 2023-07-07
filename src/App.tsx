@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -24,7 +24,7 @@ const MainWrapper = styled.div`
 const Header = styled.h1`
   font-size: 3rem;
   font-weight: 700;
-  margin: 1.25rem auto;
+  margin: 2rem auto 1.25rem auto;
   text-align: center;
 `;
 
@@ -45,12 +45,27 @@ const PokedexHalfInfo = styled(PokedexHalfList)`
 `;
 
 const GenerationSelect = styled.select`
-  margin-top: 2rem;
   font-family: Silkscreen;
-  width: 50%;
+  width: 70%;
   background-color: #ff8400;
-  border: none;
-  height: 35px;
+  border: 1px solid black;
+  height: 2.5rem;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+`;
+
+const SearchPokemon = styled.input`
+  width: 70%;
+  border: 1px solid black;
+  padding: 0.25rem;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  background-color: #ff8400;
+  font-family: Silkscreen;
+  height: 2.5rem;
+  font-size: 1rem;
 `;
 
 export default function App() {
@@ -82,13 +97,19 @@ export default function App() {
         case 'gen-3':
           offset = 251;
           limit = 135;
+          break;
+        default:
+          limit = 0;
       }
-      const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
-      );
-      const data = await res.json();
 
-      setPokemonList([...data.results]);
+      if (limit !== 0) {
+        const res = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`
+        );
+        const data = await res.json();
+
+        setPokemonList([...data.results]);
+      }
     }
     fetchInitialPokemonList();
   }, [selectedGeneration]);
@@ -131,28 +152,6 @@ export default function App() {
     <MainWrapper>
       <PokedexHalfList>
         <Header>Pokédex</Header>
-        {selectedGeneration && (
-          <>
-            <input
-              type='text'
-              placeholder='Filter by name'
-              value={textFilter}
-              onChange={(evt) => setTextFilter(evt.target.value)}
-            />
-            <PokemonList>
-              {filteredPokemonList &&
-                filteredPokemonList.map((pokemon) => (
-                  <PokemonListItem
-                    key={pokemon.name}
-                    pokemonItem={pokemon}
-                    onSelectPokemon={() => onSelectPokemon(pokemon)}
-                    caughtList={caughtList}
-                    selectedPokemon={selectedPokemon}
-                  />
-                ))}
-            </PokemonList>
-          </>
-        )}
         <GenerationSelect
           value={selectedGeneration}
           name='generation-picker'
@@ -164,6 +163,27 @@ export default function App() {
           <option value='gen-2'>Gen II</option>
           <option value='gen-3'>Gen III</option>
         </GenerationSelect>
+        {selectedGeneration && (
+          <>
+            <SearchPokemon
+              type='text'
+              placeholder='Filter by name'
+              value={textFilter}
+              onChange={(evt) => setTextFilter(evt.target.value)}
+            />
+            <PokemonList>
+              {filteredPokemonList.map((pokemon) => (
+                <PokemonListItem
+                  key={pokemon.name}
+                  pokemonItem={pokemon}
+                  onSelectPokemon={() => onSelectPokemon(pokemon)}
+                  caughtList={caughtList}
+                  selectedPokemon={selectedPokemon}
+                />
+              ))}
+            </PokemonList>
+          </>
+        )}
       </PokedexHalfList>
       <PokedexHalfInfo>
         {isPokemonSelected && (

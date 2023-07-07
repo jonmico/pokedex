@@ -78,12 +78,11 @@ export default function PokemonListItem({
 
   return (
     <ListItem onClick={onSelectPokemon} $isSelected={isSelected}>
-      {pokemon && (
-        <PokemonInfoWrapper>
-          <PokemonId>{pokemon.id}</PokemonId>
-          <span>{pokemon.name}</span>
-        </PokemonInfoWrapper>
-      )}
+      <PokemonInfoWrapper>
+        <PokemonId>{pokemon?.id}</PokemonId>
+        <span>{pokemon?.name}</span>
+      </PokemonInfoWrapper>
+
       <Pokeball
         $isCaught={isCaught}
         src={
