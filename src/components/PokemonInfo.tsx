@@ -10,7 +10,7 @@ const PokemonInfoDiv = styled.div`
   border: 1px solid black;
   width: 80%;
   min-width: 325px;
-  padding: 10px;
+
   background-color: #ff8400;
   margin: 2rem auto;
   border-radius: 10px;
@@ -20,8 +20,7 @@ const PokemonInfoDiv = styled.div`
   /* align-items: center;
   justify-content: center; */
 
-  @media only screen and (max-width: 800px) {
-    padding: 5px;
+  @media only screen and (max-width: 950px) {
     width: 100%;
     min-width: auto;
     margin: 0;

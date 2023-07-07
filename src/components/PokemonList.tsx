@@ -17,10 +17,10 @@ const List = styled.ul`
   @media only screen and (max-width: 950px) {
     max-height: 15rem;
     min-height: auto;
+    width: 100%;
   }
 
   @media only screen and (max-width: 800px) {
-    width: 100%;
   }
 `;
 

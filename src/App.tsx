@@ -23,7 +23,7 @@ const MainWrapper = styled.div`
 
   @media only screen and (max-width: 950px) {
     flex-direction: column;
-    min-width: auto;
+    min-width: 300px;
   }
 `;
 
@@ -54,12 +54,12 @@ const PokedexHalfList = styled.div`
   box-sizing: border-box;
 
   @media only screen and (max-width: 950px) {
+    padding: 1rem;
     height: auto;
     margin-bottom: 1rem;
-    /* min-width: auto; */
+    width: 80%;
 
     @media only screen and (max-width: 800px) {
-      padding: 1rem;
       min-width: 300px;
     }
   }
@@ -79,7 +79,7 @@ const GenerationSelect = styled.select`
   border-radius: 10px;
   margin-bottom: 1rem;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 950px) {
     width: 100%;
   }
 `;
@@ -96,7 +96,7 @@ const SearchPokemon = styled.input`
   height: 2.5rem;
   font-size: 1rem;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 950px) {
     width: 100%;
   }
 `;
