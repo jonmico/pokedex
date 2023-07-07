@@ -14,11 +14,17 @@ import './index.css';
 
 const MainWrapper = styled.div`
   width: 75%;
-  min-width: 950px;
+  min-width: 900px;
+  max-width: 1100px;
   margin: 2rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 950px) {
+    flex-direction: column;
+    min-width: auto;
+  }
 `;
 
 const Header = styled.h1`
@@ -33,11 +39,17 @@ const PokedexHalfList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  width: 50%;
+  min-width: 400px;
   background-color: #cc322a;
   margin: 0 5px 0 5px;
   border-radius: 15px;
   box-shadow: 1px 1px 5px black, -1px -1px 5px black;
+
+  @media only screen and (max-width: 950px) {
+    height: auto;
+    margin-bottom: 1rem;
+  }
 `;
 
 const PokedexHalfInfo = styled(PokedexHalfList)`

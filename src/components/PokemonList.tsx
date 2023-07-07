@@ -13,6 +13,11 @@ const List = styled.ul`
   max-height: 30rem;
   min-height: 10rem;
   background-color: #ff8400;
+
+  @media only screen and (max-width: 950px) {
+    max-height: 15rem;
+    min-height: auto;
+  }
 `;
 
 interface PokemonListProps {
