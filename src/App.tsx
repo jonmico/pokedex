@@ -23,7 +23,12 @@ const MainWrapper = styled.div`
 
   @media only screen and (max-width: 950px) {
     flex-direction: column;
-    min-width: 300px;
+    width: 100%;
+    min-width: 800px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    min-width: 325px;
   }
 `;
 
@@ -58,10 +63,11 @@ const PokedexHalfList = styled.div`
     height: auto;
     margin-bottom: 1rem;
     width: 80%;
-
-    @media only screen and (max-width: 800px) {
-      min-width: 300px;
-    }
+    min-width: auto;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 90%;
+    min-width: auto;
   }
 `;
 
