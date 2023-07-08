@@ -107,6 +107,10 @@ const SearchPokemon = styled.input`
   }
 `;
 
+const StarterText = styled.p`
+  text-align: center;
+`;
+
 export default function App() {
   const [pokemonList, setPokemonList] = useState<PokemonCallItem[]>([]);
   const [selectedPokemon, setSelectedPokemon] =
@@ -225,13 +229,17 @@ export default function App() {
         )}
       </PokedexHalfList>
       <PokedexHalfInfo>
-        {isPokemonSelected && (
+        {selectedGeneration === '' ? (
+          <StarterText>Choose a generation to get started!</StarterText>
+        ) : isPokemonSelected ? (
           <PokemonInfo
             onClose={handleClosePokemonInfo}
             pokemon={selectedPokemon}
             onAddCaught={() => handleAddCaught(selectedPokemon)}
             caughtList={caughtList}
           />
+        ) : (
+          <StarterText>Pick a pokemon to load its data!</StarterText>
         )}
       </PokedexHalfInfo>
     </MainWrapper>
